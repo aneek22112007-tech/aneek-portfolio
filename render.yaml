@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: aneek-das-portfolio
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: "."
+    pullRequestPreviewsEnabled: true

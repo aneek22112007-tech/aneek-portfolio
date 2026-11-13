@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aneek Das — AI Systems & Cloud Engineer</title>
+<meta name="description" content="Portfolio of Aneek Das: AI Systems Engineer specializing in Agentic Architectures, GRPO Reinforcement Learning, MCP Infrastructure, and C++20 Distributed Computing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-dark: #050508;
+  --bg-card: rgba(13, 14, 21, 0.75);
+  --bg-card-hover: rgba(20, 22, 33, 0.85);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a855f7;
+  --accent-indigo: #6366f1;
+  --accent-emerald: #10b981;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --container-w: 1140px;
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #27273a #050508;
+  background-color: var(--bg-dark);
+}
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle Film Grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── 3D CANVAS BACKGROUND ── */
+#webgl-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAVIGATION BAR ── */
+.nav-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1.25rem 2rem;
+  transition: var(--transition);
+}
+.nav-wrap.scrolled {
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 2rem;
+}
+.nav-container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-main);
+}
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(168,85,247,0.2));
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+}
+.brand-name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-menu a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.nav-menu a:hover {
+  color: var(--text-main);
+}
+.nav-btn {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.8rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── LAYOUT & WRAPPER ── */
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── HERO SECTION ── */
+.hero-section {
+  min-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(34, 211, 238, 0.06);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--accent-cyan);
+  margin-bottom: 2rem;
+  width: fit-content;
+}
+.status-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+  animation: pulse-glow 2.5s infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(2.8rem, 6.2vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.25rem;
+  max-width: 950px;
+}
+.title-highlight {
+  color: transparent;
+  background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  color: var(--accent-cyan);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.role-separator { color: var(--text-dim); }
+
+.hero-description {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 780px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #050508;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.btn-primary:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.12);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Key Metrics Row */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.metric-box {
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+}
+.metric-number {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+}
+.metric-accent { color: var(--accent-cyan); font-size: 1.2rem; }
+.metric-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+/* ── SECTION HEADER ── */
+.section {
+  padding: 6.5rem 0;
+  position: relative;
+}
+.section-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.6rem;
+}
+.section-heading {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-bottom: 3rem;
+}
+
+/* ── SPOTLIGHT CARD ARCHITECTURE ── */
+.spotlight-card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  padding: 2.2rem;
+  backdrop-filter: blur(20px);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 19px;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(34, 211, 238, 0.15),
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--bg-card-hover);
+  transform: translateY(-3px);
+}
+.spotlight-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── PROJECTS FILTER & GRID ── */
+.project-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+.project-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.project-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.badge-tag { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-special { background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); border: 1px solid rgba(34, 211, 238, 0.25); }
+.badge-winner { background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+.project-title {
+  font-family: var(--font-head);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0.4rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-main);
+}
+.project-subtitle {
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
+  font-weight: 500;
+}
+.project-index {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.project-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+.details-col-title {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.details-col-text {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.project-metrics-callout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.07);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  margin-bottom: 1.25rem;
+}
+.metrics-icon {
+  color: var(--accent-indigo);
+  flex-shrink: 0;
+}
+.metrics-text {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+.metrics-text strong {
+  color: #ffffff;
+}
+
+.project-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tech-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.project-action-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.action-link:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* ── OPEN SOURCE SECTION (HPX) ── */
+.oss-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 2rem;
+}
+.oss-summary-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.oss-lib-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-purple);
+  margin-bottom: 1rem;
+}
+.oss-title {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.oss-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.pr-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.pr-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+.pr-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateX(4px);
+}
+.pr-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.pr-status-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-emerald);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+.pr-num {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+.pr-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.pr-arrow {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+/* ── SKILLS MATRIX ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.25rem;
+}
+.skill-col {
+  padding: 1.8rem;
+}
+.skill-category-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.skill-tags-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+.skill-item::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+.spotlight-card:hover .skill-item {
+  color: var(--text-main);
+}
+.spotlight-card:hover .skill-item::before {
+  background: var(--accent-cyan);
+}
+
+/* ── EDUCATION & CERTIFICATIONS DUAL SECTION ── */
+.duo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.timeline-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  bottom: -1.75rem;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-dot {
+  position: absolute;
+  left: -4px;
+  top: 0.35rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+.timeline-period {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  margin-bottom: 0.25rem;
+}
+.timeline-heading {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+.timeline-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.timeline-score {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  margin-top: 0.25rem;
+}
+
+.cert-card-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+.cert-card-item:last-child { margin-bottom: 0; }
+.cert-vector-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cert-info h4 {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+.cert-info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ── CONTACT CTA ── */
+.contact-section {
+  text-align: center;
+  padding-bottom: 8rem;
+}
+.contact-box {
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contact-box h2 {
+  font-family: var(--font-head);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.contact-box p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+}
+.contact-channels {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.contact-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.contact-item-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(34, 211, 238, 0.4);
+  transform: translateY(-2px);
+  color: var(--accent-cyan);
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover {
+  color: var(--text-main);
+}
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 950px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-details-grid { grid-template-columns: 1fr; }
+  .oss-layout { grid-template-columns: 1fr; }
+  .duo-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-menu { display: none; }
+  .hero-section { min-height: auto; padding-top: 5rem; }
+  .spotlight-card { padding: 1.5rem; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-secondary { justify-content: center; }
+  .site-footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Three.js Ambient Interactive Background -->
+<canvas id="webgl-bg"></canvas>
+
+<!-- Top Navigation -->
+<header class="nav-wrap" id="navbar">
+  <div class="nav-container">
+    <a href="#" class="nav-brand">
+      <div class="brand-mark">AD</div>
+      <div class="brand-name">Aneek Das</div>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="#projects">Systems</a></li>
+      <li><a href="#opensource">Open Source</a></li>
+      <li><a href="#skills">Capabilities</a></li>
+      <li><a href="#education">Background</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:aneek22112007@gmail.com" class="nav-btn">Get in touch</a>
+  </div>
+</header>
+
+<div class="content-wrapper">
+
+  <!-- ── HERO ── -->
+  <section class="hero-section">
+    <div class="status-pill">
+      <span class="status-indicator"></span>
+      <span>AI Systems &amp; Agentic Infrastructure · Bengaluru, IN</span>
+    </div>
+
+    <h1 class="hero-title">
+      Engineering AI systems that <span class="title-highlight">fail safely</span> and act deterministically.
+    </h1>
+
+    <div class="hero-role">
+      <span>Agentic Systems</span>
+      <span class="role-separator">/</span>
+      <span>GRPO Reinforcement Learning</span>
+      <span class="role-separator">/</span>
+      <span>Cloud Native Backends</span>
+      <span class="role-separator">/</span>
+      <span>C++20 Parallel Computing</span>
+    </div>
+
+    <p class="hero-description">
+      Computer Science undergraduate building AI systems that combine reinforcement learning, multi-agent workflows, secure tool execution, and cloud-native backends. Hands-on experience with GRPO-trained LLM environments, MCP-based infrastructure, graph-backed agent reasoning, AWS serverless applications, and C++20 open-source development. Focused on measurable behavior, deterministic evaluation, and systems that fail safely.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        <span>Explore Featured Systems</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+      </a>
+      <a href="https://github.com/aneek22112007-tech" target="_blank" rel="noopener" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <span>GitHub Profile</span>
+      </a>
+      <a href="https://www.linkedin.com/in/aneek-das-97a468332/" target="_blank" rel="noopener" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+    </div>
+
+    <!-- Verified Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-number">8<span class="metric-accent">+</span></div>
+        <div class="metric-label">HPX C++20 Core PRs Merged</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">11</div>
+        <div class="metric-label">Production MCP Tools Authored</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">0</div>
+        <div class="metric-label">Lost Writes / 75 Concurrent Runs</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">41.7<span class="metric-accent">%</span></div>
+        <div class="metric-label">Human Oversight Chaos Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED PROJECTS ── -->
+  <section class="section" id="projects">
+    <div class="section-meta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span>Production Architecture</span>
+    </div>
+    <h2 class="section-heading">Featured Systems &amp; Research</h2>
+    <p class="section-desc">
+      Architectures built with fail-closed safety gates, deterministic validation, and rigorous empirical benchmarks.
+    </p>
+
+    <div class="projects-container">
+
+      <!-- PROJECT 1: MCP Guard -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">OJT Project</span>
+                <span class="badge badge-tag">2026</span>
+                <span class="badge badge-tag">Security &amp; Tool Isolation</span>
+              </div>
+              <h3 class="project-title">MCP Guard</h3>
+              <p class="project-subtitle">Secure Gateway &amp; Hardened Execution Layer for Model Context Protocol</p>
+            </div>
+            <div class="project-index">01 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>The Vulnerability Vector</span>
+              </div>
+              <p class="details-col-text">
+                Standard MCP tools lack authorization barriers, request isolation, and parameter verification. Malicious or compromised agent trajectories can invoke arbitrary execution payloads, leak memory scopes, or execute tool-poisoning attacks unchecked.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Fail-Closed Defense In Depth</span>
+              </div>
+              <p class="details-col-text">
+                Built an audit-first gateway with bearer-key verification hooks, per-key allowlisted tool dispatch, tool-schema fingerprint pinning, rate limiting, and rule-based tool-poisoning detection. Employs isolated Docker runtimes (read-only rootfs, zero network, non-root, strict CPU/RAM/process clamps) and a LangGraph notes agent restricted exclusively through this gateway.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-metrics-callout">
+            <svg class="metrics-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span class="metrics-text"><strong>Zero-Trust Isolation:</strong> Docker sandbox with read-only root, live SSE audit logs, and fingerprint-pinned tool definitions.</span>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">FastAPI</span>
+              <span class="tech-pill">MCP / FastMCP</span>
+              <span class="tech-pill">Docker</span>
+              <span class="tech-pill">LangGraph</span>
+              <span class="tech-pill">SQLAlchemy</span>
+              <span class="tech-pill">Alembic</span>
+              <span class="tech-pill">React</span>
+              <span class="tech-pill">Vite</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2: Cascade Sentinel -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-winner">UNPRECEDENTED Result</span>
+                <span class="badge badge-special">Graph Hacks</span>
+                <span class="badge badge-tag">Oct 2026</span>
+              </div>
+              <h3 class="project-title">Cascade Sentinel</h3>
+              <p class="project-subtitle">Graph-Backed Multi-Agent Climate Disaster Orchestration</p>
+            </div>
+            <div class="project-index">02 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span>Causal Evidence Adjudication</span>
+              </div>
+              <p class="details-col-text">
+                Multi-agent systems prone to hallucinations fail catastrophically during cascading environmental emergencies. Cascade Sentinel introduces a knowledge-graph adjudicator (FalkorDB / Cypher) that enforces formal causal consistency before approving actions.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <span>Concurrent Robustness</span>
+              </div>
+              <p class="details-col-text">
+                Implemented 11 specialized MCP tools, precedent-based scoring algorithms, explainable graph paths, and cross-episode write-back. Rigorously tested under heavy concurrent load: 75/75 parallel interventions stored with 0 lost writes.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-metrics-callout">
+            <svg class="metrics-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="metrics-text"><strong>Benchmark Verified:</strong> 75/75 concurrent proposal stress tests recorded zero lost writes and zero unverified interventions.</span>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">FastAPI</span>
+              <span class="tech-pill">FalkorDB</span>
+              <span class="tech-pill">Cypher Graph</span>
+              <span class="tech-pill">MCP</span>
+              <span class="tech-pill">Cytoscape.js</span>
+              <span class="tech-pill">Docker</span>
+            </div>
+            <div class="project-action-links">
+              <span class="action-link">Live Dashboard &amp; Demo</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3: Fire Drill -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">Flip the Switch Hackathon</span>
+                <span class="badge badge-tag">Nov 2026</span>
+                <span class="badge badge-tag">Chaos Engineering</span>
+              </div>
+              <h3 class="project-title">Fire Drill</h3>
+              <p class="project-subtitle">Chaos Engineering for Human-in-the-Loop AI Oversight</p>
+            </div>
+            <div class="project-index">03 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span>The Automation Blindspot</span>
+              </div>
+              <p class="details-col-text">
+                Human reviewers routinely experience automation complacency, rubber-stamping AI-generated action streams without scrutinizing underlying logic, leading to catastrophic latent failures in production environments.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                <span>Canary Injection Pipeline</span>
+              </div>
+              <p class="details-col-text">
+                Designed a Worker–Canary–Auditor topology that injects realistic, benign flaws into AI approval streams. Canary actions are permanently isolated from actual execution. Measured over 62 decisions (50 real + 12 canaries), discovering reviewers caught only 41.7% of canaries.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-metrics-callout">
+            <svg class="metrics-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="metrics-text"><strong>Empirical Discovery:</strong> Human reviewers caught 5/12 canaries (41.7%), demonstrating severe reviewer fatigue under volume.</span>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">AI Agents</span>
+              <span class="tech-pill">FastAPI</span>
+              <span class="tech-pill">Typer CLI</span>
+              <span class="tech-pill">Pydantic</span>
+              <span class="tech-pill">Docker</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 4: Nummuss -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">First Commit / Bharat Builds</span>
+                <span class="badge badge-tag">2026</span>
+                <span class="badge badge-tag">AWS Cloud Architecture</span>
+              </div>
+              <h3 class="project-title">Nummuss</h3>
+              <p class="project-subtitle">Deterministic Pre-Execution Safety Boundary for Autonomous Trading Agents</p>
+            </div>
+            <div class="project-index">04 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                <span>Twin-Agent Behavioral Contrast</span>
+              </div>
+              <p class="details-col-text">
+                Simulation-only twin-agent harness comparing an unconstrained agent against an agent governed by three strict pre-execution gates: Amazon Bedrock Guardrails, deterministic evidence-to-signal validation, and algorithmic cooldown limits.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                <span>Serverless Event-Driven Infrastructure</span>
+              </div>
+              <p class="details-col-text">
+                Architected with AWS CDK: Lambda handlers, EventBridge routing, DynamoDB state tracking, immutable S3 evidence snapshots, and React observability dashboard. Retains complete cryptographic audit trails for blocked vs approved orders.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-metrics-callout">
+            <svg class="metrics-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="metrics-text"><strong>Zero Unaudited Executions:</strong> All actions validated through 3 gates with persistent S3 audit trails.</span>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">AWS Lambda</span>
+              <span class="tech-pill">Amazon Bedrock</span>
+              <span class="tech-pill">DynamoDB</span>
+              <span class="tech-pill">S3 Snapshots</span>
+              <span class="tech-pill">EventBridge</span>
+              <span class="tech-pill">AWS CDK</span>
+              <span class="tech-pill">React</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 5: ThirstCast -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">Environmental Hacks</span>
+                <span class="badge badge-tag">Oct 2026</span>
+                <span class="badge badge-tag">Production PWA</span>
+              </div>
+              <h3 class="project-title">ThirstCast</h3>
+              <p class="project-subtitle">Climate Evapotranspiration Nowcasting &amp; District Decision Platform</p>
+            </div>
+            <div class="project-index">05 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                <span>Atmospheric Thirstwave Nowcasting</span>
+              </div>
+              <p class="details-col-text">
+                Real-time climate platform converting atmospheric vapor-pressure deficits and reference evapotranspiration into actionable water-demand predictions for agricultural cooperatives and municipal lakes.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <span>End-To-End Verification</span>
+              </div>
+              <p class="details-col-text">
+                Integrates bilingual English/Hindi assistant using Strands Agents with district API endpoints. Enforces rigorous validation: 28 backend unit tests, 25/25 agent question benchmarks, and 31 automated Playwright browser tests.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-metrics-callout">
+            <svg class="metrics-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="metrics-text"><strong>Test Coverage:</strong> 28 backend test suites + 25/25 deterministic agent evaluation checks + 31 Playwright UI tests passing.</span>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">AWS Lambda</span>
+              <span class="tech-pill">DynamoDB</span>
+              <span class="tech-pill">API Gateway</span>
+              <span class="tech-pill">Strands Agents</span>
+              <span class="tech-pill">Playwright</span>
+              <span class="tech-pill">PWA</span>
+            </div>
+            <div class="project-action-links">
+              <span class="action-link">Live App &amp; District API</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 6: LegalArgue RL -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">RL Research</span>
+                <span class="badge badge-tag">2026</span>
+                <span class="badge badge-tag">OpenEnv Standard</span>
+              </div>
+              <h3 class="project-title">LegalArgue RL</h3>
+              <p class="project-subtitle">Adversarial Legal Argumentation Environment via Group Relative Policy Optimization</p>
+            </div>
+            <div class="project-index">06 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+                <span>Structured Adversarial Rounds</span>
+              </div>
+              <p class="details-col-text">
+                Two-agent multi-turn environment for Prosecution and Defence agents to exchange structured rebuttals under formal procedural constraints. Designed specifically to eliminate unreliable LLM-as-a-judge scoring loops.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>Deterministic Reward Engineering</span>
+              </div>
+              <p class="details-col-text">
+                Trained using GRPO on 4-bit quantized Qwen2.5-1.5B with Unsloth. Employs deterministic rewards: statutory citation validity, IF–THEN–BECAUSE syntactic coherence, hallucination penalties, and explicit rebuttal relevance.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">OpenEnv</span>
+              <span class="tech-pill">GRPO</span>
+              <span class="tech-pill">Unsloth</span>
+              <span class="tech-pill">Qwen2.5-1.5B</span>
+              <span class="tech-pill">FastAPI</span>
+              <span class="tech-pill">Hugging Face</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 7: SocraticRL -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">RL Research</span>
+                <span class="badge badge-tag">2026</span>
+                <span class="badge badge-tag">Pedagogical Agents</span>
+              </div>
+              <h3 class="project-title">SocraticRL</h3>
+              <p class="project-subtitle">Constrained Socratic Inquiry Agent Trained via Multi-Component Reinforcement</p>
+            </div>
+            <div class="project-index">07 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>The Inquiry Constraint</span>
+              </div>
+              <p class="details-col-text">
+                Standard LLM tutors immediately furnish answers, extinguishing cognitive learning. SocraticRL trains a tutor agent to guide simulated students from misunderstanding to clarity strictly through inquiry over a 15-turn horizon.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>7-Component Reward Formulation</span>
+              </div>
+              <p class="details-col-text">
+                Seven distinct scalar objectives: question quality, topic relevance, anti-repetition, Socratic phrasing syntax, student progress delta, and heavy penalties for providing direct solutions. Forked by 2 independent research repos.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">OpenEnv</span>
+              <span class="tech-pill">GRPO</span>
+              <span class="tech-pill">FastAPI</span>
+              <span class="tech-pill">Hugging Face</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 8: InboxZeroEnv -->
+      <article class="spotlight-card project-card">
+        <div class="spotlight-content">
+          <div class="project-header-row">
+            <div>
+              <div class="project-badges">
+                <span class="badge badge-special">RL Benchmark</span>
+                <span class="badge badge-tag">2026</span>
+                <span class="badge badge-tag">Deterministic Evaluation</span>
+              </div>
+              <h3 class="project-title">InboxZeroEnv</h3>
+              <p class="project-subtitle">Automated Email-Triage RL Gym with Multi-Difficulty Tiers</p>
+            </div>
+            <div class="project-index">08 / 08</div>
+          </div>
+
+          <div class="project-details-grid">
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>Triage Complexity Benchmark</span>
+              </div>
+              <p class="details-col-text">
+                Gym-compatible email classification and action triage environment featuring 35 curated messages partitioned into Easy, Medium, and Hard behavioral tiers.
+              </p>
+            </div>
+            <div>
+              <div class="details-col-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Objective Evaluation</span>
+              </div>
+              <p class="details-col-text">
+                Deterministic keyword and regex scoring across 10 distinct action categories, featuring automated retry handling, Pydantic type safety, and Dockerized evaluation workflows.
+              </p>
+            </div>
+          </div>
+
+          <div class="project-footer-row">
+            <div class="tech-pills">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Pydantic</span>
+              <span class="tech-pill">Docker</span>
+              <span class="tech-pill">OpenAI API</span>
+              <span class="tech-pill">Hugging Face</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── OPEN SOURCE CONTRIBUTIONS ── -->
+  <section class="section" id="opensource">
+    <div class="section-meta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>High-Performance Computing</span>
+    </div>
+    <h2 class="section-heading">C++20 Parallel Systems Contributions</h2>
+    <p class="section-desc">
+      Direct contributions to the core runtime of The HPX Project — the premier C++ standard library for parallelism and distributed computing.
+    </p>
+
+    <div class="oss-layout">
+      <div class="spotlight-card oss-summary-card">
+        <div class="spotlight-content">
+          <div class="oss-lib-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span>STEllAR-GROUP / HPX</span>
+          </div>
+          <h3 class="oss-title">The HPX Project</h3>
+          <p class="oss-desc">
+            HPX implements the full C++ standard library concurrency and parallelism model, scaling from multi-core workstations to supercomputers. My contributions resolve edge cases in thread synchronization, parallel algorithmic constraints, parcel error reporting, and distributed lifecycle barriers.
+          </p>
+
+          <a href="https://github.com/STEllAR-GROUP/hpx" target="_blank" rel="noopener" class="btn-secondary" style="width:fit-content">
+            <span>Inspect Upstream Repository</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="pr-timeline">
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/8050" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#8050</span>
+            <span class="pr-desc">Fix race condition in global barrier shutdown</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7965" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7965</span>
+            <span class="pr-desc">Refine distributed parcel error reporting</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7902" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7902</span>
+            <span class="pr-desc">Implement stop-aware condition_variable wait</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7869" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7869</span>
+            <span class="pr-desc">Enforce C++20 concepts &amp; parallel reduce constraints</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7844" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7844</span>
+            <span class="pr-desc">Parallel set operations algorithmic edge cases</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7822" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7822</span>
+            <span class="pr-desc">Deterministic counting semaphore timeout test</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7817" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7817</span>
+            <span class="pr-desc">C++20 jthread move assignment lifecycle correction</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+        <a href="https://github.com/STEllAR-GROUP/hpx/pull/7161" target="_blank" rel="noopener" class="pr-card">
+          <div class="pr-info">
+            <span class="pr-status-icon">✓</span>
+            <span class="pr-num">#7161+</span>
+            <span class="pr-desc">Parallel partial sort, rotate, and shift algorithms</span>
+          </div>
+          <span class="pr-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TECHNICAL CAPABILITIES ── -->
+  <section class="section" id="skills">
+    <div class="section-meta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <span>Technical Matrix</span>
+    </div>
+    <h2 class="section-heading">Capabilities &amp; Stack</h2>
+    <p class="section-desc">
+      A systems-first engineering toolkit for machine learning environments, distributed runtimes, and resilient cloud services.
+    </p>
+
+    <div class="skills-grid">
+      <div class="spotlight-card skill-col">
+        <div class="spotlight-content">
+          <div class="skill-category-title">Languages</div>
+          <div class="skill-tags-list">
+            <div class="skill-item">Python (Async / Typing)</div>
+            <div class="skill-item">C++20 (Concepts / Threads)</div>
+            <div class="skill-item">TypeScript</div>
+            <div class="skill-item">JavaScript (ESNext)</div>
+            <div class="skill-item">SQL &amp; Cypher</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotlight-card skill-col">
+        <div class="spotlight-content">
+          <div class="skill-category-title">AI &amp; Agent Systems</div>
+          <div class="skill-tags-list">
+            <div class="skill-item">GRPO Reinforcement</div>
+            <div class="skill-item">LLM Fine-tuning (Unsloth)</div>
+            <div class="skill-item">Model Context Protocol (MCP)</div>
+            <div class="skill-item">LangGraph Workflows</div>
+            <div class="skill-item">OpenEnv Architecture</div>
+            <div class="skill-item">Strands Agents</div>
+            <div class="skill-item">Qwen2.5 Models</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotlight-card skill-col">
+        <div class="spotlight-content">
+          <div class="skill-category-title">Backend &amp; Data</div>
+          <div class="skill-tags-list">
+            <div class="skill-item">FastAPI &amp; RESTful APIs</div>
+            <div class="skill-item">SQLAlchemy &amp; Alembic</div>
+            <div class="skill-item">Pydantic Data Contracts</div>
+            <div class="skill-item">FalkorDB Graph Engine</div>
+            <div class="skill-item">Node.js &amp; Express</div>
+            <div class="skill-item">SQLite &amp; MongoDB</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotlight-card skill-col">
+        <div class="spotlight-content">
+          <div class="skill-category-title">Cloud &amp; DevOps</div>
+          <div class="skill-tags-list">
+            <div class="skill-item">AWS Lambda Serverless</div>
+            <div class="skill-item">Amazon Bedrock Guardrails</div>
+            <div class="skill-item">DynamoDB &amp; S3 Snapshots</div>
+            <div class="skill-item">EventBridge Event Bus</div>
+            <div class="skill-item">Docker Hardened Sandboxes</div>
+            <div class="skill-item">GitHub Actions CI/CD</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spotlight-card skill-col">
+        <div class="spotlight-content">
+          <div class="skill-category-title">Frontend &amp; Vis</div>
+          <div class="skill-tags-list">
+            <div class="skill-item">React &amp; Vite</div>
+            <div class="skill-item">Tailwind CSS</div>
+            <div class="skill-item">Cytoscape.js Graph Vis</div>
+            <div class="skill-item">Three.js WebGL</div>
+            <div class="skill-item">Progressive Web Apps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION & CREDENTIALS ── -->
+  <section class="section" id="education">
+    <div class="duo-grid">
+
+      <!-- Left: Academic Background -->
+      <div>
+        <div class="section-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>Formal Education</span>
+        </div>
+        <h2 class="section-heading" style="font-size:2rem">Academic Track</h2>
+        <div class="spotlight-card" style="margin-top:1.5rem">
+          <div class="spotlight-content">
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div class="timeline-period">2025 – 2029 · Pursuing</div>
+              <div class="timeline-heading">B.Tech in Computer Science &amp; Engineering</div>
+              <div class="timeline-sub">Polaris School of Technology, Bengaluru</div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div class="timeline-period">Higher Secondary</div>
+              <div class="timeline-heading">Class XII (Physics, Chemistry, Mathematics)</div>
+              <div class="timeline-sub">National Institute of Open Schooling (NIOS)</div>
+              <div class="timeline-score">Aggregate: 66.6%</div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <div class="timeline-period">Secondary School</div>
+              <div class="timeline-heading">Class X (CBSE)</div>
+              <div class="timeline-sub">Army Public School</div>
+              <div class="timeline-score">Aggregate: 79.0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Certifications & Recognition -->
+      <div>
+        <div class="section-meta">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <span>Verification</span>
+        </div>
+        <h2 class="section-heading" style="font-size:2rem">Credentials &amp; Awards</h2>
+        <div style="margin-top:1.5rem">
+
+          <div class="spotlight-card cert-card-item">
+            <div class="cert-vector-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div class="cert-info">
+              <h4>Oracle Cloud Infrastructure (OCI) 2025</h4>
+              <p>Certified AI Foundations Associate credential verifying cloud ML and infrastructure paradigms.</p>
+            </div>
+          </div>
+
+          <div class="spotlight-card cert-card-item">
+            <div class="cert-vector-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="cert-info">
+              <h4>Cybersecurity Training</h4>
+              <p>Corizo &times; IIT Bombay Mood Indigo certification covering security fundamentals and application defense.</p>
+            </div>
+          </div>
+
+          <div class="spotlight-card cert-card-item">
+            <div class="cert-vector-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div class="cert-info">
+              <h4>NSO Gold Medalist</h4>
+              <p>National Science Olympiad: Achieved International Rank 64 and Zonal Rank 1.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT CTA ── -->
+  <section class="section contact-section" id="contact">
+    <div class="spotlight-card contact-box">
+      <div class="spotlight-content">
+        <div class="status-pill" style="margin:0 auto 1.5rem">
+          <span class="status-indicator"></span>
+          <span>Open to Engagements</span>
+        </div>
+        <h2>Ready to collaborate on resilient AI?</h2>
+        <p>
+          Whether discussing multi-agent tool isolation, RL reward engineering, or distributed backend architectures — reach out directly.
+        </p>
+
+        <div class="contact-channels">
+          <a href="mailto:aneek22112007@gmail.com" class="contact-item-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>aneek22112007@gmail.com</span>
+          </a>
+          <a href="https://github.com/aneek22112007-tech" target="_blank" rel="noopener" class="contact-item-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span>GitHub Profile</span>
+          </a>
+          <a href="https://www.linkedin.com/in/aneek-das-97a468332/" target="_blank" rel="noopener" class="contact-item-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn Profile</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div>&copy; 2026 Aneek Das &middot; Engineered with deterministic precision.</div>
+    <div class="footer-links">
+      <a href="#projects">Systems</a>
+      <a href="#opensource">HPX</a>
+      <a href="#skills">Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Three.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── NAV SCROLL BEHAVIOR ── */
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+/* ── SPOTLIGHT MOUSE TRACKING ── */
+// Attaches dynamic mouse-coordinates to every card for linear/vercel-style spotlight border
+const cards = document.querySelectorAll('.spotlight-card');
+cards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+/* ── HIGH-END THREE.JS AMBIENT SCENE ── */
+// Creates a refined organic cybernetic constellation mesh + dual geometric core
+(function initThreeScene() {
+  const canvas = document.getElementById('webgl-bg');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 45;
+
+  // Mouse parallax state with smooth damping
+  const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  window.addEventListener('mousemove', (e) => {
+    mouse.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouse.targetY = -(e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  // 1. Particle Grid / Cybernetic Wave
+  const isMobile = window.innerWidth < 768;
+  const countX = isMobile ? 35 : 65;
+  const countY = isMobile ? 25 : 45;
+  const totalParticles = countX * countY;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(totalParticles * 3);
+  const colors = new Float32Array(totalParticles * 3);
+
+  const colA = new THREE.Color(0x22d3ee); // Cyan
+  const colB = new THREE.Color(0x6366f1); // Indigo
+  const colC = new THREE.Color(0x1e293b); // Slate Dark
+
+  let idx = 0;
+  for (let ix = 0; ix < countX; ix++) {
+    for (let iy = 0; iy < countY; iy++) {
+      const u = ix / (countX - 1);
+      const v = iy / (countY - 1);
+      const x = (u - 0.5) * 90;
+      const y = (v - 0.5) * 65;
+      const z = (Math.sin(u * Math.PI * 4) + Math.cos(v * Math.PI * 3)) * 3 - 10;
+
+      positions[idx * 3] = x;
+      positions[idx * 3 + 1] = y;
+      positions[idx * 3 + 2] = z;
+
+      // Subtle gradient across coordinates
+      const mixedCol = colA.clone().lerp(colB, u).lerp(colC, (1 - v) * 0.75);
+      colors[idx * 3] = mixedCol.r;
+      colors[idx * 3 + 1] = mixedCol.g;
+      colors[idx * 3 + 2] = mixedCol.b;
+
+      idx++;
+    }
+  }
+
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const particleMat = new THREE.PointsMaterial({
+    size: 0.14,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.45,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particleField = new THREE.Points(particleGeo, particleMat);
+  scene.add(particleField);
+
+  // 2. Centerpiece Nested Geometries: Icosahedron + Octahedron Core
+  const icosahedronGeo = new THREE.IcosahedronGeometry(7, 1);
+  const icosahedronMat = new THREE.MeshBasicMaterial({
+    color: 0x22d3ee,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.045
+  });
+  const icosahedron = new THREE.Mesh(icosahedronGeo, icosahedronMat);
+  icosahedron.position.set(16, 6, -12);
+  scene.add(icosahedron);
+
+  const innerCoreGeo = new THREE.OctahedronGeometry(4, 0);
+  const innerCoreMat = new THREE.MeshBasicMaterial({
+    color: 0x818cf8,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.08
+  });
+  const innerCore = new THREE.Mesh(innerCoreGeo, innerCoreMat);
+  innerCore.position.copy(icosahedron.position);
+  scene.add(innerCore);
+
+  // 3. Floating Tetrahedron and Dodecahedron companions
+  const tetraGeo = new THREE.TetrahedronGeometry(3.5, 0);
+  const tetraMat = new THREE.MeshBasicMaterial({
+    color: 0x38bdf8,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.04
+  });
+  const tetra = new THREE.Mesh(tetraGeo, tetraMat);
+  tetra.position.set(-20, -12, -8);
+  scene.add(tetra);
+
+  const dodecaGeo = new THREE.DodecahedronGeometry(3, 0);
+  const dodecaMat = new THREE.MeshBasicMaterial({
+    color: 0xa855f7,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.035
+  });
+  const dodeca = new THREE.Mesh(dodecaGeo, dodecaMat);
+  dodeca.position.set(-18, 14, -18);
+  scene.add(dodeca);
+
+  // Animation Loop with smooth lerp
+  let clock = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    clock += 0.004;
+
+    // Smooth camera mouse follow
+    mouse.x += (mouse.targetX - mouse.x) * 0.035;
+    mouse.y += (mouse.targetY - mouse.y) * 0.035;
+
+    camera.position.x = mouse.x * 2.5;
+    camera.position.y = mouse.y * 2.0;
+    camera.lookAt(0, 0, 0);
+
+    // Dynamic wave elevation in particle points
+    const posAttr = particleGeo.attributes.position;
+    const posArr = posAttr.array;
+    for (let i = 0; i < totalParticles; i++) {
+      const px = posArr[i * 3];
+      const py = posArr[i * 3 + 1];
+      posArr[i * 3 + 2] = Math.sin(clock * 1.5 + (px * 0.08)) * 2.2 +
+                         Math.cos(clock * 1.2 + (py * 0.09)) * 2.0 - 10;
+    }
+    posAttr.needsUpdate = true;
+
+    // Rotate Polyhedra
+    icosahedron.rotation.x += 0.0015;
+    icosahedron.rotation.y += 0.0025;
+    innerCore.rotation.x -= 0.003;
+    innerCore.rotation.y -= 0.002;
+
+    tetra.rotation.x += 0.002;
+    tetra.rotation.z += 0.0015;
+    tetra.position.y += Math.sin(clock * 2) * 0.015;
+
+    dodeca.rotation.y += 0.0018;
+    dodeca.rotation.z -= 0.0012;
+    dodeca.position.y += Math.cos(clock * 1.8) * 0.012;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Resize handler
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+</script>
+</body>
+</html>
